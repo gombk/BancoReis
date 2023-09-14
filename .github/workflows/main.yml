@@ -24,3 +24,4 @@ jobs:
       with:
         # GitHub token
         token: ${{ github.token }}
+        artifact_name: release/wwwroot
