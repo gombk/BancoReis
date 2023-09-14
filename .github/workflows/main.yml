@@ -24,4 +24,4 @@ jobs:
       with:
         # GitHub token
         token: ${{ github.token }}
-        artifact_name: release/wwwroot
+        artifact_name: /home/runner/work/BancoReis/BancoReis/release/wwwroot
