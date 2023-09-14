@@ -1,4 +1,6 @@
 name: Deploy to github pages
+permissions:
+  id-token: write
 # Run workflow on every push to the master branch
 on:
   push:
