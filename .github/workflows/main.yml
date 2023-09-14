@@ -19,9 +19,13 @@ jobs:
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
       run: dotnet publish BancoReis/BancoReis.csproj -c Release -o release --nologo
-    - name: Deploy GitHub Pages site
-      uses: actions/deploy-pages@v1.2.9
+    - name: Deploy to GitHub Pages
+      # You may pin to the exact commit or the version.
+      # uses: JamesIves/github-pages-deploy-action@a1ea191d508feb8485aceba848389d49f80ca2dc
+      uses: JamesIves/github-pages-deploy-action@v4.4.3
       with:
-        # GitHub token
         token: ${{ github.token }}
-        artifact_name: /home/runner/work/BancoReis/BancoReis/release/wwwroot
+        # This is the branch you wish to deploy to, for example gh-pages or docs.
+        branch: gh-pages
+        # The folder in your repository that you want to deploy. If your build script compiles into a directory named build you would put it here. Folder paths cannot have a leading / or ./. If you wish to deploy the root directory you can place a . here.
+        folder: release/wwwroot
