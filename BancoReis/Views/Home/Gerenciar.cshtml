@@ -1,0 +1,21 @@
+﻿@model Conta
+
+@{
+    ViewData["Title"] = $"{ContaBancaria.NomeTitular} - Gerenciamento de conta";
+}
+
+<form method="post" asp-action="Gerenciar">
+    <div class="mb-3">
+        <label class="form-label">Número da conta</label>
+        <input class="form-control" value="@ContaBancaria.NumeroConta" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NomeTitular" class="form-label"></label>
+        <input asp-for="NomeTitular" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success">Alterar</button>
+    </div>
+</form>

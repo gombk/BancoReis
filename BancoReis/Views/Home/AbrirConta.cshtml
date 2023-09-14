@@ -1,0 +1,39 @@
+﻿@model Conta
+
+@{
+    ViewData["Title"] = "Abertura de conta";
+}
+
+<form method="post" asp-action="AbrirConta">
+    <div class="mb-3">
+        <label asp-for="NumeroConta" class="form-label"></label>
+        <input asp-for="NumeroConta" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NomeTitular" class="form-label"></label>
+        <input asp-for="NomeTitular" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="depositCheckbox">
+            <label class="form-check-label" for="flexCheckDefault">
+                Deseja realizar um depósito?
+            </label>
+        </div>
+
+        <div id="deposit">
+            <label asp-for="Saldo" class="form-label"></label>
+            <input asp-for="Saldo" class="form-control" number />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success">Abrir conta</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/js/abrirConta.js"></script>
+}

@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h2>Bem-vindo ao Banco Reis, onde suas dívidas são infinitas e seus desesperos maiores ainda!</h2>
+    @if (ContaBancaria.NomeTitular != null)
+    {
+        <h3>Titular: @ContaBancaria.NomeTitular</h3>
+        <h3>Conta: @ContaBancaria.NumeroConta</h3>
+        <h3>Seu saldo: R$ @Math.Round(ContaBancaria.Saldo, 2, MidpointRounding.AwayFromZero)</h3>
+
+        @if (ContaBancaria.EmprestimoRestante > 0)
+        {
+            <h3>Valor restante do pagamento do empréstimo: R$ @Math.Round(ContaBancaria.EmprestimoRestante, 2, MidpointRounding.AwayFromZero)</h3>
+        }
+
+        <p>
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#depositarModal">Depositar</button>
+            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#saqueModal">Sacar</button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#emprestimoModal">Empréstimo</button>
+        </p>
+    }
+</div>
+
+<div class="modal fade" id="emprestimoModal" tabindex="-1" aria-labelledby="emprestimoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="emprestimoModalLabel">Empréstimo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @if (ContaBancaria.Saldo < 0)
+                {
+                    <p>Seu saldo está negativo, regularize antes de realizar um empréstimo!</p>
+
+                }
+                else if (ContaBancaria.EmprestimoRestante <= 0)
+                {
+                    <input id="emprestimoValor" value="@ContaBancaria.ValorEmprestimo" hidden />
+                    <p>Você possui <strong class="text-success">R$ @ContaBancaria.ValorEmprestimo</strong> em limite de empréstimo! Clique em OK para realizar o empréstimo e contratar os serviços mais confiáveis do Banco Reis!</p>
+                }
+                else
+                {
+                    <input id="emprestimoRestante" value="@ContaBancaria.EmprestimoRestante" hidden />
+                    <p>Você já realizou um empréstimo e está devendo <strong class="text-danger">R$ @ContaBancaria.EmprestimoRestante</strong>. Pague esse valor para realizar outro!</p>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                @if (ContaBancaria.Saldo < 0)
+                {
+                    <button class="btn btn-warning" disabled>Saldo negativo!</button>
+                }
+                else if (ContaBancaria.EmprestimoRestante <= 0)
+                {
+                    <button type="button" onclick="return emprestimo()" class="btn btn-success">OK</button>
+                }
+                else
+                {
+                    <button type="button" onclick="return pagarEmprestimo()" class="btn btn-success">Pagar</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="depositarModal" tabindex="-1" aria-labelledby="depositarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="depositarModalLabel">Depósito</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input id="depositoValor" class="form-control" type="number" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" onclick="return deposito()" class="btn btn-success">Depositar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="saqueModal" tabindex="-1" aria-labelledby="saqueModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="saqueModalLabel">Saque</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input id="saqueValor" class="form-control" type="number" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" onclick="return saque()" class="btn btn-danger">Sacar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

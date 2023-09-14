@@ -1,0 +1,16 @@
+﻿@model Conta
+
+@{
+    ViewData["title"] = "Entrar";
+}
+
+<form method="post" asp-action="Entrar">
+    <div class="mb-3">
+        <label class="form-label">Número da conta</label>
+        <input asp-for="NumeroConta" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success">Entrar</button>
+    </div>
+</form>
