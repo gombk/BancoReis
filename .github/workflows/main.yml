@@ -21,7 +21,7 @@ jobs:
       run: dotnet publish BancoReis/BancoReis.csproj -c Release -o release --nologo
           # changes the base-tag in index.html from '/' to 'BlazorGitHubPagesDemo' to match GitHub Pages repository subdirectory
     - name: Change base-tag in index.html from / to BlazorGitHubPagesDemo
-      run: sed -i 's/<base href="\/" \/>/<base href="\/BancoReis\/" \/>/g' release/wwwroot/index.html
+      run: sed -i 's/<base href="\/" \/>/<base href="\/BancoReis\/" \/>/g' /home/runner/work/BancoReis/BancoReis/release/wwwroot/index.html
     - name: Deploy to GitHub Pages
       # You may pin to the exact commit or the version.
       # uses: JamesIves/github-pages-deploy-action@a1ea191d508feb8485aceba848389d49f80ca2dc
