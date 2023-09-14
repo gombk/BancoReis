@@ -16,7 +16,7 @@ jobs:
         dotnet-version: 8.0.100-preview.7.23376.3
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish BancoReis.csproj -c Release -o release --nologo
+      run: dotnet publish BancoReis/BancoReis.csproj -c Release -o release --nologo
     - name: Deploy GitHub Pages site
       uses: actions/deploy-pages@v1.2.9
       with:
